@@ -1,2 +1,2 @@
-# product-developer
-Repository for the productdeveloper.net page
+# Product Developer
+Repository for the https://productdeveloper.net page
