@@ -8,7 +8,7 @@ module.exports = {
     // You can also add new values here to query them like usual
     // See all options: https://github.com/LekoArts/gatsby-themes/blob/main/themes/gatsby-theme-minimal-blog/gatsby-config.js
     siteTitle: `The Product Developer`,
-    siteTitleAlt: `The Product Developer - Blog`,
+    siteTitleAlt: `The Product Developer Blog`,
     siteHeadline: `The Product Developer Blog`,
     siteUrl: `https://productdeveloper.net`,
     siteDescription: `Site from a software engineer passionate about product development.`,
@@ -37,9 +37,13 @@ module.exports = {
             url: `https://twitter.com/Fortiz2305`,
           },
           {
-            name: `Homepage`,
-            url: `https://productdeveloper.net`,
+            name: `LinkedIn`,
+            url: `https://www.linkedin.com/in/francisco-ortiz-abril/`,
           },
+          {
+            name: `Email`,
+            url: `mailto:fortizabril@gmail.com`
+          }
         ],
       },
     },
@@ -64,9 +68,9 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `minimal-blog - @lekoarts/gatsby-theme-minimal-blog`,
-        short_name: `minimal-blog`,
-        description: `Typography driven, feature-rich blogging theme with minimal aesthetics. Includes tags/categories support and extensive features for code blocks such as live preview, line numbers, and code highlighting.`,
+        name: `product developer blog`,
+        short_name: `product-developer-blog`,
+        description: `Site from a software engineer passionate about product development.`,
         start_url: `/`,
         background_color: `#fff`,
         // This will impact how browsers show your PWA/website
@@ -136,7 +140,6 @@ module.exports = {
         ],
       },
     },
-    `gatsby-plugin-gatsby-cloud`,
     shouldAnalyseBundle && {
       resolve: `gatsby-plugin-webpack-bundle-analyser-v2`,
       options: {
