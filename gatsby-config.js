@@ -148,5 +148,11 @@ module.exports = {
         openAnalyzer: false,
       },
     },
+    {
+      resolve: `gatsby-plugin-plausible`,
+      options: {
+        domain: `productdeveloper.net`,
+      },
+    },
   ].filter(Boolean),
 }
