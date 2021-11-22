@@ -1,0 +1,99 @@
+---
+title: "How I created my blog"
+date: 2021-11-22
+slug: "/how-i-created-my-blog"
+description: "How I created my blog"
+---
+
+_If you want to remember something, write it down._
+
+I’m starting a blog. After some time of doubts (pondering about if it’s worth it, thinking that people have already
+covered all the topics I will want to write about) I decided to give it a try. It was because of three principal reasons:
+
+* Get deeper into some topics I like: **I think writing things down leads to better learning**.
+* Help other people.
+* Improve my communication skills.
+
+That said, I will use the first post to explain how I created the blog.
+
+#### The first decision: where I should publish my content?
+
+I was not sure about owning a domain name or publishing content on sites like [Medium](https://medium.com/), [Dev.to](https://dev.to/)
+or [Hashnode](https://hashnode.com/). After some research, I decided to publish on my own domain. It brings some benefits:
+
+* The first one is simple, **I own it**: I can choose and customize whatever I want.
+* I remove a dependency with a third-party platform.
+* I can still publish the same content on other platforms and redirect people to my personal blog. We have to take care of not hurting the SEO because of the duplicated content here, but we can solve it with [canonical URLs](https://developers.google.com/search/docs/advanced/crawling/consolidate-duplicate-urls).
+
+After making that decision, I will explain why I chose the tools below to create the blog.
+
+* [Gatsby](https://www.gatsbyjs.com/).
+* [Netlify](https://www.netlify.com/).
+* [Plausible](https://plausible.io/).
+
+#### Gatsby
+
+Gatsby is an open-source framework based on React that helps developers to build websites.
+
+I’m not experienced in Gatsby at all, making this blog was my first experience with this framework.
+After being checking some other tools like [Hugo](https://gohugo.io/) that also met my requirements, I decided to give a try to Gatsby just
+because I’m more familiar with its ecosystem.
+
+You can start from scratch, but if you also don’t have previous experience with Gatsby, I would recommend checking the
+available Gatsby starters: https://www.gatsbyjs.com/starters/. Once there, there are many options that you can pick.
+
+##### Customization
+
+You can customize the page as you want if you have some concepts about web development, as it is React, HTML and CSS.
+
+If you are using a Gatsby theme, they have the concept of [shadowing](https://www.gatsbyjs.com/docs/how-to/plugins-and-themes/shadowing/),
+which makes the customization really easy. This feature allows replacing any file in the theme `src` directory with your
+own implementation. As an example:
+
+* Imagine you are using a theme called `some-theme` and it has a file called `some-theme/src/components/post.tsx`.
+* If you want to replace that part with your own implementation, you just need to create a new file in
+`your-blog-directory/src/some-theme/components/post.tsx`. From that moment, your own implementation will be rendered
+instead of the default one.
+
+##### SEO friendly
+
+SEO is really important if you want people to find your website. Apart from making your site fast for search engine crawlers,
+Gatsby has some useful plugins to improve your implementation from the SEO point of view. Some of the plugins that I'm currently using:
+
+* [gatsby-plugin-sitemap](https://www.gatsbyjs.com/plugins/gatsby-plugin-sitemap/): it automatically creates a sitemap for your site every time you launch a new build.
+* [React Helmet package](https://github.com/nfl/react-helmet): it adds metadata into the web page, which is very important for SEO.
+
+#### Netlify
+
+Once we have the content for our blog, we need to host it somewhere. I had experience with [Github pages](https://pages.github.com/)
+for hosting some pages before, but I decided to try Netlify and I finally chose it. It provides some advantages:
+
+* **Continuous deployment**: After adding some build settings in just a few clicks, Netlify deploys a new version of the blog
+every time I push a new change to the repository main branch. Also, it provides other features like deploy previews,
+rollbacks, or [split testing](https://docs.netlify.com/site-deploys/split-testing/).
+I'm not currently using all of these features but they can be really useful.
+
+* **Domain configuration**: it provides a really easy configuration for a custom domain name. Also, you will have a SSL certificate for free.
+
+Although Netlify is a paid tool, all these features are included in the free plan, which is the one I’m currently using.
+
+#### Plausible
+
+I want to have some available analytics from the first moment. After trying Google Analytics, I think it’s a bit overkill for my use case.
+As there are many data I don’t understand, I have a continuous feeling of not taking all the value that it provides.
+
+After some research, I found [Plausible](https://plausible.io/). It provides simple analytics with some easy-to-understand dashboards.
+Also, at least from my point of view, it has some important advantages:
+
+* It is an open-source tool, with an [**open product roadmap**](https://github.com/plausible/analytics/projects/1) driven
+by its community.
+
+* Because of providing only some simple analytics, it has a very small script so it does not affect the web speed so much
+
+* Adblockers does not affect Plausible: it does not track any personal data or use cookies so Adblockers usually do not
+block pages with the Plausible script.
+
+You can find a Plausible demo [here](https://plausible.io/plausible.io).
+
+So, being a software developer, I had a very good experience with these three tools so I recommend any of them if you are
+in the situation of starting a website.

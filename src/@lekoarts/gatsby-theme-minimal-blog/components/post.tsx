@@ -5,7 +5,7 @@ import { MDXRenderer } from "gatsby-plugin-mdx";
 import Layout from "@lekoarts/gatsby-theme-minimal-blog/src/components/layout";
 import ItemTags from "@lekoarts/gatsby-theme-minimal-blog/src/components/item-tags";
 import Seo from "@lekoarts/gatsby-theme-minimal-blog/src/components/seo";
-import PostFooter from "@lekoarts/gatsby-theme-minimal-blog/src/components/post-footer";
+import PostFooter from "./post-footer";
 import { ShareButtons } from "../../../components/ShareButtons";
 
 type PostProps = {
@@ -87,7 +87,7 @@ const Post = ({ data: { post } }: PostProps) => {
       >
         <MDXRenderer>{post.body}</MDXRenderer>
       </section>
-      <PostFooter post={post} />
+      <PostFooter url={url} title={post.title} description={description} />
     </Layout>
   );
 };

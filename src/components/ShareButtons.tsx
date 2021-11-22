@@ -1,9 +1,11 @@
 import React from "react";
-import { Twitter, Linkedin, Pocket } from "react-feather";
 import {
   LinkedinShareButton,
   TwitterShareButton,
   PocketShareButton,
+  LinkedinIcon,
+  TwitterIcon,
+  PocketIcon
 } from "react-share";
 import styled from "styled-components";
 
@@ -20,13 +22,13 @@ export const ShareButtons: React.FunctionComponent<Props> = ({
 }) => (
   <Buttons>
     <LinkedinShareButton url={url} title={title} summary={description}>
-      <Linkedin strokeWidth={1.25} />
+      <LinkedinIcon size={40} round={true}/>
     </LinkedinShareButton>
     <TwitterShareButton url={url} title={description}>
-      <Twitter strokeWidth={1.25} />
+      <TwitterIcon size={40} round={true}/>
     </TwitterShareButton>
     <PocketShareButton url={url} title={description}>
-      <Pocket strokeWidth={1.25} />
+      <PocketIcon size={40} round={true}/>
     </PocketShareButton>
   </Buttons>
 );
