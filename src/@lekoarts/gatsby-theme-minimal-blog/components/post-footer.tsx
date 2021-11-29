@@ -22,7 +22,7 @@ const PostFooter = ({ url, title, description }: PostFooterProps) => (
 
 export default PostFooter;
 
-const ShareTitle = styled.h3`
+const ShareTitle = styled.h2`
   margin-bottom: 4px;
 `;
 
