@@ -35,20 +35,7 @@ module.exports = {
             slug: `/about`,
           }
         ],
-        externalLinks: [
-          {
-            name: `Twitter`,
-            url: `https://twitter.com/Fortiz2305`,
-          },
-          {
-            name: `LinkedIn`,
-            url: `https://www.linkedin.com/in/francisco-ortiz-abril/`,
-          },
-          {
-            name: `Email`,
-            url: `mailto:fortizabril@gmail.com`
-          }
-        ],
+        externalLinks: [],
       },
     },
     {
