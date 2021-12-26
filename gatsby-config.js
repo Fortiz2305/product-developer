@@ -27,12 +27,12 @@ module.exports = {
             slug: `/blog`,
           },
           {
-            title: `About`,
-            slug: `/about`,
-          },
-          {
             title: `Talks`,
             slug: `/talks`
+          },
+          {
+            title: `About`,
+            slug: `/about`,
           }
         ],
         externalLinks: [
