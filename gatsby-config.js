@@ -143,6 +143,7 @@ module.exports = {
       resolve: `gatsby-plugin-plausible`,
       options: {
         domain: `productdeveloper.net`,
+        outboundLinkTracking: true
       },
     },
   ].filter(Boolean),
