@@ -138,13 +138,6 @@ module.exports = {
         reportFilename: `_bundle.html`,
         openAnalyzer: false,
       },
-    },
-    {
-      resolve: `gatsby-plugin-plausible`,
-      options: {
-        domain: `productdeveloper.net`,
-        outboundLinkTracking: true
-      },
-    },
+    }
   ].filter(Boolean),
 }
