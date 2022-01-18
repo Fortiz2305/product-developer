@@ -1,13 +1,14 @@
 import React from "react";
+import styled from "styled-components";
 import {
   LinkedinShareButton,
   TwitterShareButton,
   PocketShareButton,
   LinkedinIcon,
   TwitterIcon,
-  PocketIcon
+  PocketIcon,
 } from "react-share";
-import styled from "styled-components";
+import { trackEvent } from "../utils/TrackEvent";
 
 type Props = {
   url: string;
@@ -19,19 +20,38 @@ export const ShareButtons: React.FunctionComponent<Props> = ({
   url,
   title,
   description,
-}) => (
-  <Buttons>
-    <LinkedinShareButton url={url} title={title} summary={description}>
-      <LinkedinIcon size={40} round={true}/>
-    </LinkedinShareButton>
-    <TwitterShareButton url={url} title={description}>
-      <TwitterIcon size={40} round={true}/>
-    </TwitterShareButton>
-    <PocketShareButton url={url} title={description}>
-      <PocketIcon size={40} round={true}/>
-    </PocketShareButton>
-  </Buttons>
-);
+}) => {
+  const onSharePost = (postTitle: string, network: string) => {
+    trackEvent({ name: "Share post", data: { network, post: postTitle } });
+  };
+
+  return (
+    <Buttons>
+      <LinkedinShareButton
+        url={url}
+        title={title}
+        summary={description}
+        onClick={() => onSharePost(title, "linkedin")}
+      >
+        <LinkedinIcon size={40} round={true} />
+      </LinkedinShareButton>
+      <TwitterShareButton
+        url={url}
+        title={description}
+        onClick={() => onSharePost(title, "twitter")}
+      >
+        <TwitterIcon size={40} round={true} />
+      </TwitterShareButton>
+      <PocketShareButton
+        url={url}
+        title={description}
+        onClick={() => onSharePost(title, "pocket")}
+      >
+        <PocketIcon size={40} round={true} />
+      </PocketShareButton>
+    </Buttons>
+  );
+};
 
 const Buttons = styled.div`
   display: flex;

@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import Layout from "@lekoarts/gatsby-theme-minimal-blog/src/components/layout";
+import { trackEvent } from "../utils/TrackEvent";
 
 const NotFound: React.FunctionComponent = () => {
   useEffect(() => {
-    window.plausible(`404`, { props: { path: document.location.pathname } });
+    trackEvent({ name: `404`, data: { path: document.location.pathname } });
   });
 
   return (
