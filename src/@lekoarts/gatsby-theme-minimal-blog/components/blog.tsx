@@ -1,13 +1,13 @@
 /** @jsx jsx */
 import { jsx, Heading, Link as TLink, Flex } from "theme-ui";
-import { Link } from "gatsby";
+import { HeadFC, Link } from "gatsby";
 import Layout from "@lekoarts/gatsby-theme-minimal-blog/src/components/layout";
 import Listing from "@lekoarts/gatsby-theme-minimal-blog/src/components/listing";
 import useMinimalBlogConfig from "@lekoarts/gatsby-theme-minimal-blog/src/hooks/use-minimal-blog-config";
 import replaceSlashes from "@lekoarts/gatsby-theme-minimal-blog/src/utils/replaceSlashes";
 import Seo from "@lekoarts/gatsby-theme-minimal-blog/src/components/seo";
 
-type PostsProps = {
+export type MBBlogProps = {
   posts: {
     slug: string;
     title: string;
@@ -22,12 +22,11 @@ type PostsProps = {
   }[];
 };
 
-const Blog = ({ posts }: PostsProps) => {
+const Blog = ({ posts }: MBBlogProps) => {
   const { tagsPath, basePath } = useMinimalBlogConfig();
 
   return (
     <Layout>
-      <Seo title="Blog" />
       <Flex
         sx={{
           alignItems: `center`,
@@ -52,3 +51,5 @@ const Blog = ({ posts }: PostsProps) => {
 };
 
 export default Blog;
+
+export const Head: HeadFC = () => <Seo title="Blog" />

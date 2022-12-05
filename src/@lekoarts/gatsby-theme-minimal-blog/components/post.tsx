@@ -1,14 +1,14 @@
 /** @jsx jsx */
 import * as React from "react";
+import type { HeadFC, PageProps } from "gatsby"
 import { jsx, Heading } from "theme-ui";
-import { MDXRenderer } from "gatsby-plugin-mdx";
-import Layout from "@lekoarts/gatsby-theme-minimal-blog/src/components/layout";
-import ItemTags from "@lekoarts/gatsby-theme-minimal-blog/src/components/item-tags";
-import Seo from "@lekoarts/gatsby-theme-minimal-blog/src/components/seo";
 import PostFooter from "./post-footer";
 import { ShareButtons } from "../../../components/ShareButtons";
+import Layout from '@lekoarts/gatsby-theme-minimal-blog/src/components/layout';
+import ItemTags from '@lekoarts/gatsby-theme-minimal-blog/src/components/item-tags';
+import Seo from '@lekoarts/gatsby-theme-minimal-blog/src/components/seo';
 
-type PostProps = {
+export type MBPostProps = {
   data: {
     post: {
       slug: string;
@@ -37,20 +37,11 @@ type PostProps = {
 const px = [`32px`, `16px`, `8px`, `4px`];
 const shadow = px.map((v) => `rgba(0, 0, 0, 0.15) 0px ${v} ${v} 0px`);
 
-const Post = ({ data: { post } }: PostProps) => {
+const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data: { post }, children }) => {
   const url = typeof window !== "undefined" ? window.location.href : "";
   const description = post.description ? post.description : post.excerpt;
   return (
     <Layout>
-      <Seo
-        title={post.title}
-        description={description}
-        image={
-          post.banner ? post.banner?.childImageSharp?.resize?.src : undefined
-        }
-        pathname={post.slug}
-        canonicalUrl={post.canonicalUrl}
-      />
       <Heading as="h2" variant="styles.h2">
         {post.title}
       </Heading>
@@ -80,12 +71,13 @@ const Post = ({ data: { post } }: PostProps) => {
           my: 5,
           ".gatsby-resp-image-wrapper": {
             my: [4, 4, 5],
+            borderRadius: `4px`,
             boxShadow: shadow.join(`, `),
           },
           variant: `layout.content`,
         }}
       >
-        <MDXRenderer>{post.body}</MDXRenderer>
+        {children}
       </section>
       <PostFooter url={url} title={post.title} description={description} />
     </Layout>
@@ -93,3 +85,13 @@ const Post = ({ data: { post } }: PostProps) => {
 };
 
 export default Post;
+
+export const Head: HeadFC<MBPostProps> = ({ data: { post } }) => (
+  <Seo
+    title={post.title}
+    description={post.description ? post.description : post.excerpt}
+    image={post.banner ? post.banner?.childImageSharp?.resize?.src : undefined}
+    pathname={post.slug}
+    canonicalUrl={post.canonicalUrl}
+  />
+)

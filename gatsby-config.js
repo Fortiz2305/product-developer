@@ -4,9 +4,6 @@ const shouldAnalyseBundle = process.env.ANALYSE_BUNDLE
 
 module.exports = {
   siteMetadata: {
-    // You can overwrite values here that are used for the SEO component
-    // You can also add new values here to query them like usual
-    // See all options: https://github.com/LekoArts/gatsby-themes/blob/main/themes/gatsby-theme-minimal-blog/gatsby-config.js
     siteTitle: `The Product Developer`,
     siteTitleAlt: `The Product Developer Blog`,
     siteHeadline: `The Product Developer Blog`,
@@ -19,7 +16,6 @@ module.exports = {
   plugins: [
     {
       resolve: `@lekoarts/gatsby-theme-minimal-blog`,
-      // See the theme's README for all available options
       options: {
         navigation: [
           {
@@ -113,18 +109,16 @@ module.exports = {
                   custom_elements: [{ "content:encoded": content }],
                 }
               }),
-            query: `
-              {
-                allPost(sort: { fields: date, order: DESC }) {
-                  nodes {
-                    title
-                    date(formatString: "MMMM D, YYYY")
-                    excerpt
-                    slug
-                  }
+            query: `{
+              allPost(sort: {date: DESC}) {
+                nodes {
+                  title
+                  date(formatString: "MMMM D, YYYY")
+                  excerpt
+                  slug
                 }
               }
-            `,
+            }`,
             output: `rss.xml`,
             title: `The Product Developer Blog`,
           },

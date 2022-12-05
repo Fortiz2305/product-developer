@@ -1,31 +1,28 @@
 /** @jsx jsx */
 import { jsx, Heading } from "theme-ui"
-import { MDXRenderer } from "gatsby-plugin-mdx"
 import Layout from "@lekoarts/gatsby-theme-minimal-blog/src/components/layout";
 import Seo from "@lekoarts/gatsby-theme-minimal-blog/src/components/seo"
+import type { HeadFC, PageProps } from 'gatsby';
 
-type PageProps = {
-  data: {
-    page: {
-      title: string
-      slug: string
-      excerpt: string
-      body: string
-    }
+export type MBPageProps = {
+  page: {
+    title: string
+    slug: string
+    excerpt: string
   }
-  [key: string]: any
 }
 
-const Page = ({ data: { page } }: PageProps) => (
+const Page: React.FC<React.PropsWithChildren<PageProps<MBPageProps>>> = ({ data: { page }, children }) => (
   <Layout>
-    <Seo title={page.title} description={page.excerpt} />
     <Heading as="h2" variant="styles.h2">
       {page.title}
     </Heading>
     <section sx={{ my: 4, variant: `layout.content` }}>
-      <MDXRenderer>{page.body}</MDXRenderer>
+      {children}
     </section>
   </Layout>
 )
 
 export default Page
+
+export const Head: HeadFC<MBPageProps> = ({ data: { page } }) => <Seo title={page.title} description={page.excerpt} />

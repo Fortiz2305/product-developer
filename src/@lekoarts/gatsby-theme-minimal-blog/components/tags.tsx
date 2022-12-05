@@ -1,25 +1,24 @@
 /** @jsx jsx */
 import { jsx, Link as TLink, Heading, Box, Flex } from "theme-ui"
 import kebabCase from "lodash.kebabcase"
-import { Link } from "gatsby"
+import { HeadFC, Link } from "gatsby"
 import Layout from "@lekoarts/gatsby-theme-minimal-blog/src/components/layout";
 import useMinimalBlogConfig from "@lekoarts/gatsby-theme-minimal-blog/src/hooks/use-minimal-blog-config"
 import Seo from "@lekoarts/gatsby-theme-minimal-blog/src/components/seo"
 import replaceSlashes from "@lekoarts/gatsby-theme-minimal-blog/src/utils/replaceSlashes"
 
-type PostsProps = {
+type MBTagsProps = {
   list: {
     fieldValue: string
     totalCount: number
   }[]
 }
 
-const Tags = ({ list }: PostsProps) => {
+const Tags = ({ list }: MBTagsProps) => {
   const { tagsPath, basePath } = useMinimalBlogConfig()
 
   return (
     <Layout>
-      <Seo title="Tags" />
       <Heading as="h2" variant="styles.h2">
         Tags
       </Heading>
@@ -41,3 +40,5 @@ const Tags = ({ list }: PostsProps) => {
 }
 
 export default Tags
+
+export const Head: HeadFC = () => <Seo title="Tags" />

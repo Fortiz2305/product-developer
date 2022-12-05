@@ -14,17 +14,17 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "@lekoarts/gatsby-theme-minimal-blog": "^4.1.7",
-    "gatsby": "^4.20.0",
+    "@lekoarts/gatsby-theme-minimal-blog": "^6.0.0",
+    "gatsby": "^5.0.0",
     "gatsby-omni-font-loader": "^2.0.2",
-    "gatsby-plugin-feed": "^4.20.0",
-    "gatsby-plugin-manifest": "^4.20.0",
-    "gatsby-plugin-sitemap": "^5.20.0",
-    "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.27",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-share": "^4.4.0",
-    "styled-components": "^5.3.5"
+    "gatsby-plugin-feed": "^5.0.0",
+    "gatsby-plugin-manifest": "^5.0.0",
+    "gatsby-plugin-sitemap": "^6.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-share": "^4.4.1",
+    "styled-components": "^5.3.6",
+    "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.30"
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.24",
