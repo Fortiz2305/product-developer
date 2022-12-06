@@ -1,11 +1,11 @@
 /** @jsx jsx */
-import { jsx, Link as TLink, Heading, Box, Flex } from "theme-ui"
-import kebabCase from "lodash.kebabcase"
-import { HeadFC, Link } from "gatsby"
-import Layout from "@lekoarts/gatsby-theme-minimal-blog/src/components/layout";
-import useMinimalBlogConfig from "@lekoarts/gatsby-theme-minimal-blog/src/hooks/use-minimal-blog-config"
-import Seo from "@lekoarts/gatsby-theme-minimal-blog/src/components/seo"
-import replaceSlashes from "@lekoarts/gatsby-theme-minimal-blog/src/utils/replaceSlashes"
+import { jsx, Heading, Box, Flex } from 'theme-ui'
+import kebabCase from 'lodash.kebabcase'
+import { HeadFC, Link } from 'gatsby'
+import Layout from '@lekoarts/gatsby-theme-minimal-blog/src/components/layout';
+import useMinimalBlogConfig from '@lekoarts/gatsby-theme-minimal-blog/src/hooks/use-minimal-blog-config'
+import Seo from '@lekoarts/gatsby-theme-minimal-blog/src/components/seo'
+import replaceSlashes from '@lekoarts/gatsby-theme-minimal-blog/src/utils/replaceSlashes'
 
 type MBTagsProps = {
   list: {
@@ -19,19 +19,18 @@ const Tags = ({ list }: MBTagsProps) => {
 
   return (
     <Layout>
-      <Heading as="h2" variant="styles.h2">
+      <Heading as='h2' variant='styles.h2'>
         Tags
       </Heading>
       <Box mt={[4, 5]}>
         {list.map((listItem) => (
           <Flex key={listItem.fieldValue} mb={[1, 1, 2]} sx={{ alignItems: `center` }}>
-            <TLink
-              as={Link}
-              sx={{ variant: `links.listItem`, mr: 2 }}
+            <Link
+              sx={(t) => ({ ...t.styles?.a, variant: `links.listItem`, mr: 2 })}
               to={replaceSlashes(`/${basePath}/${tagsPath}/${kebabCase(listItem.fieldValue)}`)}
             >
               {listItem.fieldValue} <span sx={{ color: `secondary` }}>({listItem.totalCount})</span>
-            </TLink>
+            </Link>
           </Flex>
         ))}
       </Box>
@@ -41,4 +40,4 @@ const Tags = ({ list }: MBTagsProps) => {
 
 export default Tags
 
-export const Head: HeadFC = () => <Seo title="Tags" />
+export const Head: HeadFC = () => <Seo title='Tags' />

@@ -1,6 +1,6 @@
-import * as React from "react";
-import styled from "styled-components";
-import { ShareButtons } from "../../../components/ShareButtons";
+import * as React from 'react';
+import styled from 'styled-components';
+import { ShareButtons } from '../../../components/ShareButtons';
 
 type PostFooterProps = {
   url: string;
@@ -27,7 +27,7 @@ const ShareTitle = styled.h2`
 `;
 
 const ShareDescription = styled.p`
-  font-family: "IBM Plex Sans";
+  font-family: 'IBM Plex Sans';
   margin-top: 0px;
   font-size: 18px;
 `;

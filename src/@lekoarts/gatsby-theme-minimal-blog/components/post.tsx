@@ -1,33 +1,31 @@
 /** @jsx jsx */
-import * as React from "react";
-import type { HeadFC, PageProps } from "gatsby"
-import { jsx, Heading } from "theme-ui";
-import PostFooter from "./post-footer";
-import { ShareButtons } from "../../../components/ShareButtons";
+import * as React from 'react';
+import type { HeadFC, PageProps } from 'gatsby';
+import { jsx, Heading } from 'theme-ui';
+import PostFooter from './post-footer';
+import { ShareButtons } from '../../../components/ShareButtons';
 import Layout from '@lekoarts/gatsby-theme-minimal-blog/src/components/layout';
 import ItemTags from '@lekoarts/gatsby-theme-minimal-blog/src/components/item-tags';
 import Seo from '@lekoarts/gatsby-theme-minimal-blog/src/components/seo';
 
 export type MBPostProps = {
-  data: {
-    post: {
+  post: {
+    slug: string;
+    title: string;
+    date: string;
+    tags?: {
+      name: string;
       slug: string;
-      title: string;
-      date: string;
-      tags?: {
-        name: string;
-        slug: string;
-      }[];
-      description?: string;
-      canonicalUrl?: string;
-      body: string;
-      excerpt: string;
-      timeToRead?: number;
-      banner?: {
-        childImageSharp: {
-          resize: {
-            src: string;
-          };
+    }[];
+    description?: string;
+    canonicalUrl?: string;
+    body: string;
+    excerpt: string;
+    timeToRead?: number;
+    banner?: {
+      childImageSharp: {
+        resize: {
+          src: string;
         };
       };
     };
@@ -38,11 +36,11 @@ const px = [`32px`, `16px`, `8px`, `4px`];
 const shadow = px.map((v) => `rgba(0, 0, 0, 0.15) 0px ${v} ${v} 0px`);
 
 const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data: { post }, children }) => {
-  const url = typeof window !== "undefined" ? window.location.href : "";
+  const url = typeof window !== 'undefined' ? window.location.href : '';
   const description = post.description ? post.description : post.excerpt;
   return (
     <Layout>
-      <Heading as="h2" variant="styles.h2">
+      <Heading as='h2' variant='styles.h2'>
         {post.title}
       </Heading>
       <p
@@ -69,7 +67,7 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data:
       <section
         sx={{
           my: 5,
-          ".gatsby-resp-image-wrapper": {
+          '.gatsby-resp-image-wrapper': {
             my: [4, 4, 5],
             borderRadius: `4px`,
             boxShadow: shadow.join(`, `),
@@ -94,4 +92,4 @@ export const Head: HeadFC<MBPostProps> = ({ data: { post } }) => (
     pathname={post.slug}
     canonicalUrl={post.canonicalUrl}
   />
-)
+);
