@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 import {
   LinkedinShareButton,
   TwitterShareButton,
@@ -7,8 +7,8 @@ import {
   LinkedinIcon,
   TwitterIcon,
   PocketIcon,
-} from "react-share";
-import { trackEvent } from "../utils/TrackEvent";
+} from 'react-share';
+import { trackEvent } from '../utils/TrackEvent';
 
 type Props = {
   url: string;
@@ -22,7 +22,7 @@ export const ShareButtons: React.FunctionComponent<Props> = ({
   description,
 }) => {
   const onSharePost = (postTitle: string, network: string) => {
-    trackEvent({ name: "Share post", data: { network, post: postTitle } });
+    trackEvent({ name: 'Share post', data: { network, post: postTitle } });
   };
 
   return (
@@ -31,21 +31,21 @@ export const ShareButtons: React.FunctionComponent<Props> = ({
         url={url}
         title={title}
         summary={description}
-        onClick={() => onSharePost(title, "linkedin")}
+        onClick={() => onSharePost(title, 'linkedin')}
       >
         <LinkedinIcon size={40} round={true} />
       </LinkedinShareButton>
       <TwitterShareButton
         url={url}
         title={description}
-        onClick={() => onSharePost(title, "twitter")}
+        onClick={() => onSharePost(title, 'twitter')}
       >
         <TwitterIcon size={40} round={true} />
       </TwitterShareButton>
       <PocketShareButton
         url={url}
         title={description}
-        onClick={() => onSharePost(title, "pocket")}
+        onClick={() => onSharePost(title, 'pocket')}
       >
         <PocketIcon size={40} round={true} />
       </PocketShareButton>
