@@ -27,7 +27,5 @@ const ShareTitle = styled.h2`
 `;
 
 const ShareDescription = styled.p`
-  font-family: 'IBM Plex Sans';
   margin-top: 0px;
-  font-size: 18px;
 `;
