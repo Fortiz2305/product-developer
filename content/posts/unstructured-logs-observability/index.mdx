@@ -1,0 +1,124 @@
+---
+title: "From Unstructured Logs to Observability"
+date: 2023-03-22
+slug: "/unstructured-logs-observability"
+banner: "./binocular.png"
+description: "From unstructured logs to Observability. By @Fortiz2305"
+tags:
+  - Observability
+---
+
+As the systems' complexity grows, maintaining their control becomes more challenging. Over the last few years, the concept of observability has increased its popularity as a way to keep this control. There were many applications where unstructured logs and metrics were enough, but we need something else now.
+
+In this post, we will see a summary of this evolution. But we will start by defining what an observable system is. For that, I like these definitions from the [Observability Engineering](https://www.oreilly.com/library/view/observability-engineering/9781492076438/) book. In an observable system:
+
+* _"You can understand the inner workings and system state solely by observing and interrogating with external tools"._
+* _"You can understand the internal state without shipping any new custom code to handle it"_
+* _"You can understand what any particular user of your software may be experiencing at any given time"_
+* _"You can compare any arbitrary groups of user requests in ways that let you correctly identify which attributes are commonly shared by all users who are experiencing unexpected behavior in your application"_
+
+When I first saw these definitions, I thought about how many times I had to deploy new code to try to figure out something in a system. These systems were not observable.
+
+
+## Starting point: unstructured logs & metrics
+
+We have traditionally used unstructured logs and metrics to debug problems in our systems. These tools have some limitations:
+
+* **Unstructured Logs**: even though log lines are for human reading, it generates huge volumes of noise once we are in production. Apart from that, the information is spread across many log lines, making it difficult to find the right details. Even if we have good tools and skills to process these lines, it’s slow to debug in this way.
+
+* **Metrics**: the main limitation here is relying on having known errors. The emitted metrics and dashboards are designed in advance, and they are usually difficult to query in creative and new ways when we have new problems. They can be useful for detecting when systems are over or under thresholds that someone has previously categorized as an anomaly, acting as a trigger. But they don’t help when we need to debug a new error.
+
+
+## Observability: paradigm change
+
+In a context where most errors are repeated, having some intuition, dashboards with pre-aggregated metrics, and unstructured logs can be enough.
+
+But this is not always true in modern systems, where we usually run into errors that we have never seen before. That’s why we need a paradigm change to debug with observability. **Instead of designing the metrics and logs that we want to have in advance, we want to add all the possible context to each request in our system.** Then, we want to interrogate this information. I’ll go to the [Observability Engineering](https://www.oreilly.com/library/view/observability-engineering/9781492076438/) book again:
+
+_"Debugging with observability is about preserving as much of the context around any given request as possible, so you can ask questions and reconstruct the environment and circumstances that triggered the bug that led to a novel failure mode"._
+
+
+#### High Cardinality & High Dimensionality
+
+Ideally, we would like to add anything that could be relevant to our requests, and this generates a lot of information. There are two important concepts if we want to do this:
+
+* **Cardinality**: refers to the number of distinct values that an attribute can have. Some examples:
+    * a boolean field has a cardinality of 2 (true or false)
+    * an userId field has a cardinality equal to the number of users in a system.
+
+* **Dimensionality**: refers to the number of attributes that a set can have. Example: in an event, the dimensionality is the number of attributes that we can add.
+
+When we receive unknown errors we need to interrogate our systems in arbitrary ways, so we need as much information as possible. **Having** **high cardinality and high dimensionality is critical to achieving Observability**.
+
+
+#### Structured events
+
+A structured event is the basis for debugging with observability. An event is a record of something that occurred while one particular request interacted with our service. It can contain any interesting detail about what occurred during the request: request parameters, user ids, other relevant ids, durations, etc. When a request finishes, we will group all those parameters with a key-value format and we will send it to our system.
+
+If we want to investigate something, we could compare some events with others, and check what attributes are different between them (this is why we need high cardinality and high dimensionality).
+
+
+## From unstructured logs to structured events
+
+How can we evolve our system to have observability if we are currently using unstructured logs in our application? In this section, we will see a possible evolution from unstructured logs to structured events.
+
+
+#### Unstructured logs
+
+As we said above, although the purpose of unstructured logs is to have human-readable log lines, they generate a lot of volume and noise in a production environment, making it very difficult to extract relevant information from them.
+
+Let’s see an example with an HTTP request:
+
+```
+2023-03-16T12:02:00 - info: Request 1234 started from user 5678. GET /my/endpoint
+2023-03-16T12:02:00 - info: User 5678 authenticated - name foo
+2023-03-16T12:02:01 - info: Processing request 1234
+2023-03-16T12:02:02 - info: Request 1234 finished with status code 200. It took 2 seconds
+```
+
+As we can see, the relevant information is spread across many individual lines. Even with powerful log processing systems, it would be slow to extract the right details from those lines.
+
+
+#### Structured logs
+
+Structured logs are log lines enhanced with key-value fields that make it easier to extract relevant information from them. Instead of injecting relevant identifiers and information into the plain log lines, we have a structure now.
+
+Let’s convert the logs above to a structured format:
+
+```
+timestamp=2023-03-16T12:02:00 level="info" message="Request started" requestId="1234" userId="5678" path="/my/endpoint" httpMethod="GET"
+timestamp=2023-03-16T12:02:00 level="info" message="User authenticated" requestId="1234" userId="5678" userName="foo" userPlan="professional"
+timestamp=2023-03-16T12:02:01 level="info" message="Processing request" requestId="1234" rateLimited="false"
+timestamp=2023-03-16T12:02:02 level="info" message="Request finished" requestId="1234" durationMs="2000" statusCode="200"
+```
+
+The key-value structure makes the logs more readable by machines. These logs are easier to ingest by a log processing system, where we would have the possibility to do some filtering or grouping operations against them. **With this step, we already have the capability to make questions and debug our system**.
+
+
+#### Structured events
+
+We already have the flexibility to interrogate our system with the log lines above, and we could get high dimensionality and high cardinality if we have a good log processing system. However, we still have the relevant information spread across many log lines.
+Imagine that we have some slow requests in our system, we might ask ourselves some questions: "Is this a global problem?", "What are the affected users?". In the example above, the request duration and the user that performed it are in different lines, making it difficult to get responses to our questions.
+
+If we think about this, all the log lines in our example could be grouped into one single event. This would be a structured event, and it would look like this:
+
+```
+timestamp=2023-03-16T12:02:02 level="info" message="Processed request" requestId="1234" path="/my/endpoint" httpMethod="GET" userId="5678" userName="foo" userPlan="professional" rateLimited="false" durationMs="2000" statusCode="200"
+```
+
+We are grouping everything that is relevant to us into a single event. In this way, it is easier to search for relevant information based on arbitrary criteria.
+
+
+### Summary
+
+We started the post with the limitations of systems that only have unstructured logs and metrics, and the paradigm change that we need to debug with observability. We also showed the importance of having high cardinality and high dimensionality in our observability system.
+
+Then, we have seen an evolution from unstructured logs to structured events, one of the fundamental parts of Observability.
+
+* Unstructured logs have a human-readable format but they are difficult to parse, making it very difficult to extract relevant information from them.
+* Structured logs are easier to ingest, providing the possibility to interrogate the data, and extract information from them. However, the relevant information is spread across many different lines.
+* In structured events we group all the relevant information into one single event, achieving the possibility to interrogate the data as we want.
+
+I will stop this post here, but I will continue with this topic in future posts, seeing how we can group different events into distributed traces. Also, we’ll see the different components of a distributed trace and we will instrument some code with [Opentelemetry](https://opentelemetry.io/) to send events.
+
+Do you have any feedback about this post? Please, [contact me](mailto:fortizabril@gmail.com) and share it!
