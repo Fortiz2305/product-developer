@@ -14,13 +14,13 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "@lekoarts/gatsby-theme-minimal-blog": "^6.0.0",
-    "gatsby": "^5.11.0",
-    "gatsby-plugin-feed": "^5.11.0",
-    "gatsby-plugin-manifest": "^5.11.0",
-    "gatsby-plugin-sitemap": "^6.11.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "@lekoarts/gatsby-theme-minimal-blog": "^6.2.3",
+    "gatsby": "^5.13.4",
+    "gatsby-plugin-feed": "^5.13.1",
+    "gatsby-plugin-manifest": "^5.13.1",
+    "gatsby-plugin-sitemap": "^6.13.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-share": "^4.4.1",
     "styled-components": "^5.3.11"
   },
