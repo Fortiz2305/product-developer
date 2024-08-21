@@ -15,14 +15,14 @@
   },
   "dependencies": {
     "@lekoarts/gatsby-theme-minimal-blog": "^6.2.3",
-    "gatsby": "^5.13.4",
+    "gatsby": "^5.13.7",
     "gatsby-plugin-feed": "^5.13.1",
     "gatsby-plugin-manifest": "^5.13.1",
     "gatsby-plugin-sitemap": "^6.13.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-share": "^5.1.0",
-    "styled-components": "^6.1.11"
+    "styled-components": "^6.1.12"
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.34",
