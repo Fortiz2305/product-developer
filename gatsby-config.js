@@ -6,7 +6,7 @@ module.exports = {
     siteTitleAlt: `The Product Developer Blog`,
     siteHeadline: `The Product Developer Blog`,
     siteUrl: `https://productdeveloper.net`,
-    siteDescription: `Site from a software engineer passionate about product development.`,
+    siteDescription: `Notes from a product engineer on building products in small steps, with feedback from users, systems and teams.`,
     siteLanguage: `en`,
     siteImage: `/banner.jpg`,
     author: `@Fortiz2305`,
@@ -38,7 +38,7 @@ module.exports = {
       options: {
         name: `product developer blog`,
         short_name: `product-developer-blog`,
-        description: `Site from a software engineer passionate about product development.`,
+        description: `Notes from a product engineer on building products in small steps, with feedback from users, systems and teams.`,
         start_url: `/`,
         background_color: `#fff`,
         // This will impact how browsers show your PWA/website
