@@ -30,7 +30,7 @@ type MBHomepageProps = {
 
 const PostSummary = ({ post }: { post: HomepagePost }) => (
   <article sx={{ mb: [4, 5] }}>
-    <Link to={post.slug} sx={(t) => ({ ...t.styles?.a, fontSize: [2, 3], fontFamily: `heading`, fontWeight: `heading`, letterSpacing: `-0.01em`, color: `heading`, textDecoration: `none`, ':hover': { color: `primary` } })}>
+    <Link to={post.slug} sx={(t) => ({ ...t.styles?.a, fontSize: [2, 3], fontWeight: `medium`, color: `heading`, textDecoration: `none`, ':hover': { color: `primary` } })}>
       {post.title}
     </Link>
     <p sx={{ color: `secondary`, mt: 1, mb: 2, fontSize: [1, 1, 2] }}>

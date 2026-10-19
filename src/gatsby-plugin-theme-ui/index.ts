@@ -35,20 +35,7 @@ const theme = merge(originalTheme, {
       },
     },
   },
-  fonts: {
-    body: `"Source Serif 4 Variable", Georgia, "Times New Roman", serif`,
-    heading: `"Instrument Sans Variable", "Helvetica Neue", Arial, sans-serif`,
-  },
-  fontWeights: {
-    heading: 600,
-  },
   styles: {
-    p: {
-      letterSpacing: `normal`,
-    },
-    h1: { letterSpacing: `-0.02em` },
-    h2: { letterSpacing: `-0.015em` },
-    h3: { letterSpacing: `-0.01em` },
     img: subtleImageFrame,
   },
   layout: {
