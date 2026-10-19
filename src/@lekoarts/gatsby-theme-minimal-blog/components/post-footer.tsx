@@ -12,9 +12,8 @@ const PostFooter = ({ url, title, description }: PostFooterProps) => (
   <>
     <ShareTitle>Share this post!</ShareTitle>
     <ShareDescription>
-      Thanks for reading this post. If you think it can be interesting for some
-      other people, feel free to share this link with anyone you want. Also, you
-      can use the links below to share it on Twitter, LinkedIn, or Pocket.
+      Thanks for reading. If you know someone who would find it useful, send it
+      their way.
     </ShareDescription>
     <ShareButtons url={url} title={title} description={description} />
   </>

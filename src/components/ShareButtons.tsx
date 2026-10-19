@@ -1,14 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
+/** @jsx jsx */
+import { useState } from 'react';
+import { jsx } from 'theme-ui';
 import {
   LinkedinShareButton,
   TwitterShareButton,
-  PocketShareButton,
+  BlueskyShareButton,
   LinkedinIcon,
-  TwitterIcon,
-  PocketIcon,
+  XIcon,
+  BlueskyIcon,
 } from 'react-share';
-import { trackEvent } from '../utils/TrackEvent';
 
 type Props = {
   url: string;
@@ -16,68 +16,67 @@ type Props = {
   description: string;
 };
 
-export const ShareButtons: React.FunctionComponent<Props> = ({
-  url,
-  title,
-  description,
-}) => {
-  const onSharePost = (postTitle: string, network: string) => {
-    trackEvent({ name: 'Share post', data: { network, post: postTitle } });
+const ICON_SIZE = 40;
+const COPIED_FEEDBACK_MS = 2000;
+
+export const ShareButtons = ({ url, title, description }: Props) => {
+  const [isLinkCopied, setIsLinkCopied] = useState(false);
+
+  const copyLink = async () => {
+    await navigator.clipboard.writeText(url || window.location.href);
+    setIsLinkCopied(true);
+    setTimeout(() => setIsLinkCopied(false), COPIED_FEEDBACK_MS);
   };
 
   return (
-    <Buttons>
-      <LinkedinShareButton
-        url={url}
-        title={title}
-        summary={description}
-        onClick={() => onSharePost(title, 'linkedin')}
-      >
-        <LinkedinIcon size={40} round={true} />
+    <div
+      sx={{
+        display: `flex`,
+        alignItems: `center`,
+        gap: `10px`,
+        mt: 3,
+        button: {
+          display: `flex`,
+          alignItems: `center`,
+          justifyContent: `center`,
+          transition: `transform 0.2s ease-out`,
+        },
+        'button:hover': { transform: `scale(1.15)` },
+        'button:focus-visible': { outline: `2px solid`, outlineColor: `secondary`, outlineOffset: `2px`, borderRadius: `50%` },
+      }}
+    >
+      <LinkedinShareButton url={url} title={title} summary={description} aria-label='Share on LinkedIn'>
+        <LinkedinIcon size={ICON_SIZE} round={true} />
       </LinkedinShareButton>
-      <TwitterShareButton
-        url={url}
-        title={description}
-        onClick={() => onSharePost(title, 'twitter')}
-      >
-        <TwitterIcon size={40} round={true} />
+      <TwitterShareButton url={url} title={title} aria-label='Share on X'>
+        <XIcon size={ICON_SIZE} round={true} />
       </TwitterShareButton>
-      <PocketShareButton
-        url={url}
-        title={description}
-        onClick={() => onSharePost(title, 'pocket')}
+      <BlueskyShareButton url={url} title={title} aria-label='Share on Bluesky'>
+        <BlueskyIcon size={ICON_SIZE} round={true} />
+      </BlueskyShareButton>
+      <button
+        type='button'
+        onClick={copyLink}
+        aria-label='Copy link'
+        sx={{
+          width: `${ICON_SIZE}px`,
+          height: `${ICON_SIZE}px`,
+          p: 0,
+          border: 0,
+          borderRadius: `50%`,
+          cursor: `pointer`,
+          color: `background`,
+          bg: `secondary`,
+        }}
       >
-        <PocketIcon size={40} round={true} />
-      </PocketShareButton>
-    </Buttons>
+        <svg viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' aria-hidden='true'>
+          <path d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71' />
+          <path d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71' />
+        </svg>
+      </button>
+      <span role='status' sx={{ fontSize: 1, color: `secondary` }}>
+        {isLinkCopied ? `Link copied` : ``}
+      </span>
+    </div>
   );
 };
-
-const Buttons = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 16px;
-
-  button {
-    display: flex;
-    align-items: center;
-    margin-right: 10px;
-    transition: all 0.2s ease-out;
-  }
-
-  button:hover {
-    transform: scale(1.15);
-  }
-
-  button:focus {
-    outline: 0;
-  }
-
-  button:last-child {
-    margin-right: 0;
-  }
-
-  svg {
-    color: var(--theme-ui-colors-secondary, #5f6c80);
-  }
-`;
