@@ -18,6 +18,7 @@ type Props = {
 
 const ICON_SIZE = 40;
 const COPIED_FEEDBACK_MS = 2000;
+const MONOCHROME_ICON = { fill: `var(--theme-ui-colors-secondary)` };
 
 export const ShareButtons = ({ url, title, description }: Props) => {
   const [isLinkCopied, setIsLinkCopied] = useState(false);
@@ -46,13 +47,13 @@ export const ShareButtons = ({ url, title, description }: Props) => {
       }}
     >
       <LinkedinShareButton url={url} title={title} summary={description} aria-label='Share on LinkedIn'>
-        <LinkedinIcon size={ICON_SIZE} round={true} />
+        <LinkedinIcon size={ICON_SIZE} round={true} bgStyle={MONOCHROME_ICON} />
       </LinkedinShareButton>
       <TwitterShareButton url={url} title={title} aria-label='Share on X'>
-        <XIcon size={ICON_SIZE} round={true} />
+        <XIcon size={ICON_SIZE} round={true} bgStyle={MONOCHROME_ICON} />
       </TwitterShareButton>
       <BlueskyShareButton url={url} title={title} aria-label='Share on Bluesky'>
-        <BlueskyIcon size={ICON_SIZE} round={true} />
+        <BlueskyIcon size={ICON_SIZE} round={true} bgStyle={MONOCHROME_ICON} />
       </BlueskyShareButton>
       <button
         type='button'

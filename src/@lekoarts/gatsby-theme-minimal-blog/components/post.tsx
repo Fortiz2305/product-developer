@@ -3,7 +3,6 @@ import * as React from 'react';
 import type { HeadFC, PageProps } from 'gatsby';
 import { jsx, Heading } from 'theme-ui';
 import PostFooter from './post-footer';
-import { ShareButtons } from '../../../components/ShareButtons';
 import Layout from '@lekoarts/gatsby-theme-minimal-blog/src/components/layout';
 import ItemTags from '@lekoarts/gatsby-theme-minimal-blog/src/components/item-tags';
 import Seo from '@lekoarts/gatsby-theme-minimal-blog/src/components/seo';
@@ -61,8 +60,6 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data:
         {post.timeToRead && ` — `}
         {post.timeToRead && <span>{post.timeToRead} min read</span>}
       </p>
-
-      <ShareButtons url={url} title={post.title} description={description} />
 
       <section
         sx={{

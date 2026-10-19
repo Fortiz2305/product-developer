@@ -1,5 +1,5 @@
-import * as React from 'react';
-import styled from 'styled-components';
+/** @jsx jsx */
+import { jsx } from 'theme-ui';
 import { ShareButtons } from '../../../components/ShareButtons';
 
 type PostFooterProps = {
@@ -9,22 +9,12 @@ type PostFooterProps = {
 };
 
 const PostFooter = ({ url, title, description }: PostFooterProps) => (
-  <>
-    <ShareTitle>Share this post!</ShareTitle>
-    <ShareDescription>
-      Thanks for reading. If you know someone who would find it useful, send it
-      their way.
-    </ShareDescription>
+  <footer sx={{ variant: `dividers.top`, pt: 4 }}>
+    <p sx={{ color: `secondary`, m: 0, fontSize: [1, 1, 2] }}>
+      Thanks for reading. If you know someone who would find it useful, send it their way.
+    </p>
     <ShareButtons url={url} title={title} description={description} />
-  </>
+  </footer>
 );
 
 export default PostFooter;
-
-const ShareTitle = styled.h2`
-  margin-bottom: 4px;
-`;
-
-const ShareDescription = styled.p`
-  margin-top: 0px;
-`;
