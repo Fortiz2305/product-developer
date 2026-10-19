@@ -41,10 +41,8 @@ module.exports = {
         short_name: `product-developer-blog`,
         description: `Notes from a product engineer on building products in small steps, with feedback from users, systems and teams.`,
         start_url: `/`,
-        background_color: `#fff`,
-        // This will impact how browsers show your PWA/website
-        // https://css-tricks.com/meta-theme-color-and-trickery/
-        // theme_color: `#6B46C1`,
+        background_color: `#fbfafc`,
+        theme_color: `#5a1fa8`,
         display: `standalone`,
         icons: [
           {

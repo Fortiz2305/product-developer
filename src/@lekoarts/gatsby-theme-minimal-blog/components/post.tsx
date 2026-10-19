@@ -31,9 +31,6 @@ export type MBPostProps = {
   };
 };
 
-const px = [`32px`, `16px`, `8px`, `4px`];
-const shadow = px.map((v) => `rgba(0, 0, 0, 0.15) 0px ${v} ${v} 0px`);
-
 const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data: { post }, children }) => {
   const url = typeof window !== 'undefined' ? window.location.href : '';
   const description = post.description ? post.description : post.excerpt;
@@ -67,7 +64,8 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data:
           '.gatsby-resp-image-wrapper': {
             my: [4, 4, 5],
             borderRadius: `4px`,
-            boxShadow: shadow.join(`, `),
+            boxShadow: `0 0 0 1px var(--theme-ui-colors-divide)`,
+            overflow: `hidden`,
           },
           variant: `layout.content`,
         }}
